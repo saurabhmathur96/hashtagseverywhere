@@ -1,0 +1,22 @@
+import twitter
+
+
+def get_tweets(q, count):
+''' Use the twitter api and get @count tweets on topic @q '''
+  with open('CONFIG') as f:
+      OAUTH_TOKEN = f.readline().strip()
+      OAUTH_TOKEN_SECRET = f.readline().strip()
+      CONSUMER_KEY = f.readline().strip()
+      CONSUMER_KEY_SECRET = f.readline().strip()
+
+  auth = twitter.oauth.OAuth(OAUTH_TOKEN, OAUTH_TOKEN_SECRET,
+                             CONSUMER_KEY, CONSUMER_SECRET)
+
+  twitter_api = twitter.Twitter(auth=auth)
+  
+  response = twitter_api.search.tweets(q=q, count=count)
+  
+  return response
+  
+
+

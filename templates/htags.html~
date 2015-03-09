@@ -1,0 +1,39 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="http://dimplejs.org/dist/dimple.v2.1.2.min.js"></script>
+
+</head>
+<body>
+
+    <script type="text/javascript">
+    var data;
+    d3.json("/static/data.json", function(json){
+        data = json;
+        var h = (window.innerHeight)*data.length/(data.length+1)
+        var svg = dimple.newSvg("body",700, h );
+        var chart = new dimple.chart(svg, data);
+        chart.setBounds(200, 30, 400,  h*0.8);
+        chart.addCategoryAxis("y", "Hashtag");
+        chart.addMeasureAxis("x", "Frequency");
+        //chart.setBounds(20, 20, 460, 360);
+        //chart.addMeasureAxis("p", "Frequency");
+        //chart.addSeries("Hashtag", dimple.plot.pie);
+        chart.addSeries(null, dimple.plot.bar);
+      chart.draw();
+    });
+  
+  </script>
+
+</body>
+
+
+
+</html>

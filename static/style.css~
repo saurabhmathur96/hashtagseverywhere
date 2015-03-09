@@ -1,0 +1,99 @@
+body{
+    height:100%;
+}
+
+body {
+  background: 
+    linear-gradient(
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ),
+    url("/static/trees-green.jpeg");
+    min-height: 100%;
+    min-width: 100%;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center center; 
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+header {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -30%);
+  color: white;
+  text-align: center;
+}
+h1 {
+  font-family: sans-serif;
+  font-weight: 700;
+  margin 0;
+  font-size: 3rem;
+  white-space: nowrap;
+}
+
+p {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+
+
+input[type="text"] {
+
+  margin: 0;
+  margin-top: 20px;
+  width: 70%;
+  padding: 10px;
+  border: none;
+  border: solid 1px white;
+  border-bottom-style: 
+  transition: box-shadow 0.3s, border 0.3s;
+
+}
+input[type="text"]:focus, input[type="text"].focus {
+  
+  
+  /*transition: box-shadow 0.3s, border 0.3s;*/
+  border: solid 1px black;
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -ms-transition: all 0.2s;
+    -o-transition: all 0.2s;
+    transition: all 0.2s; 
+  /*box-shadow: 0 0 5px 1px #ddd;*/
+}
+
+
+#submit_button {
+  border: solid 1px ;
+  
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: bold;
+  margin:0;
+  padding: 10px;
+  text-transform: none;
+  transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -webkit-transition: all 0.3s ease 0s;
+  width: 16.795%;
+  /* auto */
+  text-align: center;
+  /* DELETE WHEN WIDTH AUTO */
+  border: none;
+    background: none repeat scroll 0 0 #999999;
+    color: white; 
+  
+   }
+  
+  #submit_button:hover{
+  background: none repeat scroll 0 0 #444444;
+  color: white; 
+  }
+  
+  
