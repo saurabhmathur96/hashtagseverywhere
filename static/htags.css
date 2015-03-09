@@ -1,0 +1,17 @@
+body{
+	font-family: 'Source Sans Pro', sans-serif;
+	overflow-y: hidden;
+}
+#analysis{
+  position: fixed;
+  bottom: 0; right: 0;
+  width: 100%;
+
+  color: #333333;
+  
+  text-align: center;
+  padding: 2px;
+  min-height: 10px;
+  
+}
+
