@@ -7,6 +7,8 @@ body{
     height:100%;
     line-height: 1.5;
     color: white;
+    position: relative;
+    overflow: hidden;
 
 }
 
@@ -16,7 +18,7 @@ body {
     rgba(0,0,0,0.4)
     ),url("/static/skyline.jpg");
 
-    min-height: 100%;
+    min-height: 90%;
     min-width: 100%;
     background-size: cover !important;
     background-attachment: fixed !important;
@@ -114,13 +116,14 @@ a:hover{
 
 
 footer{
-
+  position: fixed;
+  bottom: 0; right: 0;
+  width: 100%;
+  background-color: #333333;
   text-align: center;
-  width:100%;
-  height:80px;
-  position:absolute;
-  bottom:0;
-  left:0;
+  padding: 2px;
+  min-height: 10px;
+  
 }
 
 

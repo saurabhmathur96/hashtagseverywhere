@@ -33,7 +33,7 @@ def htags():
   hashtags = get_hashtags(tweets) 
   tweet_texts = get_tweet_texts(tweets) 
   print (hashtags)
-  c = Counter(hashtags)
+  c = Counter(hashtags).most_common(20)
   print (dict(c))
   d = [{"Hashtag": key, "Frequency":value} for key, value in dict(c).iteritems()]
   print json.dumps(d)
@@ -42,9 +42,10 @@ def htags():
     json.dump(d, outfile)
   
   words = get_words(tweet_texts)
-  
-  print ('lexical diversity: {}%'.format(lexical_diversity_percent(words)))
-  print ('Average length: {} words'.format(average_words(tweet_texts)))
+  diversity = lexical_diversity_percent(words)
+  avg_words = average_words(tweet_texts)
+  print ('lexical diversity: {}%'.format(diversity))
+  print ('Average length: {} words'.format(avg_words))
   
   
   #return redirect('/') 
