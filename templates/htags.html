@@ -16,14 +16,14 @@
 
 </head>
 <body>
-  <em>200 tweets processed.</em>
+
   <div id="chart">
     <script type="text/javascript">
     var data;
     d3.json("/static/data.json", function(json){
         data = json;
         var h = (window.innerHeight)*data.length/(data.length+1)
-        var svg = dimple.newSvg("body",700, h );
+        var svg = dimple.newSvg("body",700, h*0.95 );
         var chart = new dimple.chart(svg, data);
         chart.setBounds(200, 30, 400,  h*0.8);
         chart.addCategoryAxis("y", "Hashtag");
@@ -38,9 +38,8 @@
   </script>
 </div>
   <div id="analysis">
-
     Average Tweet Length is <strong>{{avg_words}}</strong> words <br>
-    Lexical Diversity is <strong>{{diversity}}</strong> %
+    Lexical Diversity is <strong>{{diversity}}</strong> % (  <em>200 tweets processed.</em> )
   </div>
 </body>
 
