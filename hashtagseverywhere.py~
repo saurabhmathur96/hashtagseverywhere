@@ -28,15 +28,15 @@ def hello_world():
 @app.route('/htags', methods = ['POST'])
 def htags():
   topic = request.form['topic']
-  print ('Topic: {}'.format(topic))
+  #print ('Topic: {}'.format(topic))
   tweets = get_tweets(q=topic, count=COUNT)
   hashtags = get_hashtags(tweets) 
   tweet_texts = get_tweet_texts(tweets) 
-  print (hashtags)
+  #print (hashtags)
   c = Counter(hashtags).most_common(20)
-  print (dict(c))
+  #print (dict(c))
   d = [{"Hashtag": key, "Frequency":value} for key, value in dict(c).iteritems()]
-  print json.dumps(d)
+  #print json.dumps(d)
   
   with open('static/data.json', 'w') as outfile:
     json.dump(d, outfile)
@@ -49,7 +49,7 @@ def htags():
   
   
   #return redirect('/') 
-  return render_template('htags.html', d=d)
+  return render_template('htags.html', d=d, topic=topic, diversity=diversity, avg_words=avg_words)
 
 if __name__ == '__main__':
-  app.run(debug=True)
+  app.run(debug=False)
