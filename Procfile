@@ -1,2 +1,2 @@
-web: gunicorn hashtagseverywhere:app --log-file=-
+web: python runserver.py
 worker: python runworker.py
