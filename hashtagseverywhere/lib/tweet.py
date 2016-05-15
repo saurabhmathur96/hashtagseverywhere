@@ -1,7 +1,7 @@
 import os, twitter
 from collections import Counter
 
-COUNT=128
+COUNT=os.getenv('TWEET_COUNT', 128)
 
 class Twitter(object):
     twitterapi = None
