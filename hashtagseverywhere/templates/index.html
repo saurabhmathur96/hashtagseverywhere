@@ -1,0 +1,122 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Hashtags Everywhere !</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <script src="./static/d3.min.js" charset="utf-8"></script>
+    <script async src="./static/dimple.min.js" charset="utf-8"></script>
+    <style>
+        .loaded {
+            display: none;
+        }
+        .loading {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Hashtags Everywhere</h1>
+        <p>
+            Visualise twitter hashtags for any topic.
+        </p>
+    </header>
+    
+    <section id="charts">
+        
+    </section>
+    
+    
+    <section id="search">
+        <input type="text" name="topic" id="topic" placeholder="Enter a topic..." />
+        <button id="search-button"> Search ! </button>
+        <img id="spinner" class="loaded" src="./static/ajax-loader.gif"> </img>
+        
+    </section>
+
+    <footer>
+        <small>Made by <a href="http://saurabhmathur96.github.io/">Saurabh Mathur</a></small>
+    </footer>
+    <script src="./static/fetch.js"></script>
+    <script>
+        window.onload = main;
+        function main() {
+            var topicField = document.querySelector('#topic');
+            var searchButton = document.querySelector('#search-button');
+            var spinner = document.querySelector('#spinner');
+            searchButton.onclick = requestTweets;
+            
+            
+            function requestTweets() {
+                spinner.className = 'loading';
+                searchButton.disabled = 'disabled';
+                var topic = topicField.value;
+                options = {
+                    method: 'get',
+                    url: '/api/v1/tweets?topic='+encodeURIComponent(topic)
+                };
+                fetch(options, onFetch);
+                
+            }
+            
+            function onFetch(error, response) {
+                if (error || response.status != 200) {
+                    return alert('an error occured');
+                }
+                var response = JSON.parse(response.text);
+                var jobid = response.jobid;
+                console.log(jobid);
+                checkResult(jobid);
+            }
+            
+            function checkResult(id) {
+                options = {
+                    method: 'get',
+                    url: '/api/v1/results/' + id
+                };
+                fetch(options, function (error, response) {
+                    if (response.status == 202) {
+                        return setTimeout(function () {
+                        checkResult(id);
+                        }, 1000);
+                    }
+                    
+                    spinner.className = 'loaded';
+                    searchButton.disabled = '';
+                    
+                    if (response.status == 200) {
+                        
+                        return drawChart(JSON.parse(response.text)['result']);
+                    }
+                    
+                    alert('an error occured');
+                    
+                });
+            }
+        
+            
+            function drawChart(data) {
+                var svg = dimple.newSvg('#charts', 800,  250);
+                console.log(data)
+                var data = data.sort(compareByFrequency).slice(0, 10);
+                var chart = new dimple.chart(svg, data);
+                chart.addCategoryAxis('y', ['hashtag']);
+                chart.addMeasureAxis('x', 'frequency');
+                var series = chart.addSeries('frequency', dimple.plot.bar);
+                series.barGap = 0.05;
+                chart.draw();
+                window.scrollTo(0,document.body.scrollHeight);
+                
+            }
+
+            
+            function compareByFrequency(p1, p2) {
+                return - p1.frequency + p2.frequency;
+            }
+        }
+    </script>
+</body>

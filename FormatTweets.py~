@@ -1,3 +1,0 @@
-def format_tweets(tweets):
-''' return a list of tweets with each element of form {hashtag: count} '''
-  print tweets
