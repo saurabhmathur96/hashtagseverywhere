@@ -1,2 +1,2 @@
-python runserver.py &
+gunicorn hashtagseverywhere:app &
 python runworker.py
