@@ -1,3 +1,3 @@
 from hashtagseverywhere import app
 
-app.run(debug)
+app.run()
